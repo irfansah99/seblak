@@ -3,7 +3,7 @@ import { useState } from "react"; //
 import { BackgroundGradient } from "../components/background-gradient";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { FaUtensils, FaIceCream, FaWineGlass } from "react-icons/fa";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 const categories = [
@@ -15,7 +15,6 @@ const categories = [
 
 export default function Sidebar() {
 const [open, setOpen] = useState(true);
-const router = useRouter()
 const searchParams = useSearchParams();
 const kategori = searchParams.get("kategori");
 
