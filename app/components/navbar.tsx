@@ -30,19 +30,19 @@ export default function Navbar() {
   const pathname = usePathname();
   return (
     <nav
-      className={`w-full transition-all duration-300  ${isSticky ? "bg-white  text-gray-900 lg:text-xl text-sm" : "bg-transparent text-white lg:text-2xl text-lg"} fixed  left-0 z-50  top-0  p-4 lg:px-8`}
+      className={`w-full transition-all duration-300  ${isSticky ? "bg-white  text-gray-900 lg:text-xl text-[12px]" : "bg-transparent text-white lg:text-2xl text-[14px]"} fixed  left-0 z-50  top-0  p-4 lg:px-8`}
       aria-label="Global"
     >
       <div className="flex items-center justify-between">
         <div className="flex lg:flex-1">
           <h1
-            className={`${fascinate_Inline.className} font-bold transition-all text-cyan-300 ${isSticky ? "lg:text-3xl text-lg" : "lg:text-5xl text-2xl"}`}
+            className={`${fascinate_Inline.className} font-bold transition-all text-cyan-300 ${isSticky ? "lg:text-3xl text-sm" : "lg:text-5xl text-lg"}`}
           >
-            Seblak Store
+            Seblak99
           </h1>
         </div>
-        <div className='flex lg:gap-16 font-semibold gap-2'>
-          <Link href="/" className={`leading-6 px-2 py-1 rounded ${
+        <div className='flex lg:gap-14 font-semibold gap-1 mx-2'>
+          <Link href="/" className={`leading-6 lg:px-2 py-1 rounded ${
     pathname === "/" ? " text-cyan-400" : "hover:bg-slate-400"
   }`}>
             Home

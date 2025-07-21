@@ -10,7 +10,7 @@ import {
     return (
       <footer className="bg-slate-900 text-white py-6 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-xl font-semibold mb-2">Karang Taruna Semper Barat</h1>
+          <h1 className="mf:text-xl text-lg font-semibold mb-2">Seblak Store</h1>
   
           <p className="text-sm mb-4">
             &copy; {new Date().getFullYear()} Seblak99. All rights reserved. Designed by{" "}
@@ -24,7 +24,7 @@ import {
             </a>
           </p>
   
-          <h2 className="mt-6 text-lg font-medium">Contact With Us</h2>
+          <h2 className="mt-6 text-sm font-medium">Contact With Us</h2>
   
           <ul className="flex mt-3 gap-6 text-3xl lg:text-6xl text-white items-center justify-center">
             <li>

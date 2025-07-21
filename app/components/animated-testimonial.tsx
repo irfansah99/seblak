@@ -39,13 +39,14 @@ export const AnimatedTestimonials = ({
   }, [autoplay]);
 
   const randomRotateY = () => {
-    return Math.floor(Math.random() * 20) - 10;
+    return Math.floor(Math.random() * 20) - 15;
   };
   return (
     <div className="mx-auto  px-4 py-20 font-sans antialiased  md:px-8 lg:px-12">
-      <div className="relative grid  lg:gap-20  grid-cols-2">
+      <div className="relative grid grid-cols-2 gap-8 lg:gap-20">
         <div>
-          <div className="relative h-[500px] w-3/4 mx-auto">
+          <div className="relative 
+         md:h-[500px] h-[250px]  w-3/4 mx-auto">
             <AnimatePresence>
               {testimonials.map((testimonial, index) => (
                 <motion.div
@@ -84,14 +85,14 @@ export const AnimatedTestimonials = ({
                     width={500}
                     height={500}
                     draggable={false}
-                    className="lg:h-full lg:w-full w-[90%] h-3/4  rounded-3xl object-cover object-center"
+                    className="h-full w-full   rounded-3xl object-cover object-center"
                   />
                 </motion.div>
               ))}
             </AnimatePresence>
           </div>
         </div>
-        <div className="flex flex-col justify-between py-4 sm:pl-5">
+        <div className="flex flex-col justify-between  sm:pl-5">
           <motion.div
             key={active}
             initial={{
@@ -114,7 +115,7 @@ export const AnimatedTestimonials = ({
             <h3 className="md:mt-8 lg:text-3xl text-lg  font-bold text-black dark:text-white">
               {testimonials[active].name}
             </h3>
-            <motion.p className="mt-8 md:text-2xl  text-white dark:text-neutral-300">
+            <motion.p className="md:mt-8 mt-2 md:text-2xl text-[10px]  text-white dark:text-neutral-300">
               {testimonials[active].quote.split(" ").map((word, index) => (
                 <motion.span
                   key={index}
@@ -140,7 +141,7 @@ export const AnimatedTestimonials = ({
               ))}
             </motion.p>
           </motion.div>
-          <div className="flex lg:gap-4 gap-2 mt-2 lg:pt-12 md:pt-0">
+          <div className="flex gap-2 mt-4 lg:mt-12">
             <button
               onClick={handlePrev}
               className="group/button flex h-20 w-20 items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800"

@@ -20,18 +20,18 @@ export default function ProductList({ items }: { items: Product[] }) {
         {kategori ? kategori : "Semua Produk"}
       </h2>
 
-      <div className="grid gap-x-6 gap-y-10 grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 xl:gap-x-8">
+      <div className="grid gap-x-6  gap-y-10 sm:grid-cols-3 grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 xl:gap-x-8">
         {filtered.map((product) => (
           <BackgroundGradient
             key={product.id}
-            className="p-4 rounded-3xl bg-zinc-800"
+            className="sm:p-4 p-2 rounded-3xl bg-zinc-800 w-full h-full"
           >
             <img
               src={product.imageSrc}
               alt={product.imageAlt}
               className="aspect-square w-full rounded-xl bg-gray-200 object-cover"
             />
-            <h3 className="mt-4 text-sm text-white">{product.name}</h3>
+            <h3 className="mt-4 text-[12px] text-white">{product.name}</h3>
             <p className="mt-1 text-lg font-medium text-white">$ {product.price}</p>
             <Link
               href={{
@@ -40,7 +40,7 @@ export default function ProductList({ items }: { items: Product[] }) {
               }}
               scroll={false} 
             >
-              <div className="py-1 w-full rounded text-center bg-blue-500 hover:bg-blue-800">
+              <div className="py-1 w-full mb-2 rounded text-center bg-blue-500 hover:bg-blue-800">
                 Tambah
               </div>
             </Link>

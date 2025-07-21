@@ -34,7 +34,7 @@ export default function Slider() {
       >
         {images.map((src, idx) => (
           <SwiperSlide key={idx}>
-            <div className=" h-full  p-5">
+            <div className=" h-full  lg:p-5 py-2">
               <img
                 src={src}
                 alt={`Slide ${idx}`}

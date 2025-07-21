@@ -10,7 +10,7 @@ export default function Home() {
         }}
         className="bg-cover bg-center min-h-screen w-full flex items-center"
       >
-        <div className="w-1/2 px-10 text-white absolute bottom-0">
+        <div className="lg:w-1/2 px-10 text-white absolute bottom-0 w-[70%]">
           <h1 className="lg:text-4xl font-bold text-lg">
             THIS IS{" "}
             <strong className="text-cyan-400">

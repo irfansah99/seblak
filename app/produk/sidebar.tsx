@@ -14,7 +14,7 @@ const categories = [
 ];
 
 export default function Sidebar() {
-const [open, setOpen] = useState(true);
+const [open, setOpen] = useState(false);
 const searchParams = useSearchParams();
 const kategori = searchParams.get("kategori");
 
@@ -35,7 +35,7 @@ const kategori = searchParams.get("kategori");
       )}
 
       {open && (
-        <div className={`fixed top-20  bottom-56 left-0 md:w-64 w-52 z-20 transition-transform duration-300 py-5 ${
+        <div className={`fixed top-20  bottom-56 left-0 md:w-64 w-42 z-20 transition-transform duration-300 py-5 ${
             open ? "translate-x-0" : "-translate-x-full"
           }`}>
           <BackgroundGradient className="rounded-3xl lg:h-[700px] md:h-[75vh] bg-zinc-800">
@@ -52,7 +52,7 @@ const kategori = searchParams.get("kategori");
                       query: cat.value ? { kategori: cat.value } : {},
                     }}
                     scroll={false}
-                    className={`flex items-center gap-2 flex-col bg-black ring-2 py-3 lg:w-3/4 w-1/2 rounded transition duration-300
+                    className={`flex items-center gap-2 flex-col bg-black ring-2 py-3 w-3/4  rounded transition duration-300
                       ${isActive
                         ? "ring-cyan-200 shadow-lg shadow-cyan-400/80 scale-105"
                         : "ring-cyan-500 hover:ring-cyan-300 hover:shadow-lg hover:shadow-cyan-400/50 hover:scale-105"
