@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Sidebar from "./sidebar"
 
 export default function ProdukLayout({
@@ -9,7 +10,9 @@ export default function ProdukLayout({
 }) {
   return (
     <div className="flex min-h-screen bg-black text-white">
-      <Sidebar />
+      <Suspense fallback={<div>Loading sidebar...</div>}>
+        <Sidebar />
+      </Suspense>
       <main className="flex-1 p-4 relative">
         {children}
         {modal}
