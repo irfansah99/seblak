@@ -2,7 +2,6 @@
 
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getProduk } from "@/app/produk/data";
 import { Product } from "../../type";
 
 export default function ProdukModal() {
@@ -14,12 +13,14 @@ export default function ProdukModal() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const products = await getProduk();
-      const found = products.find((item : Product) => item.slug === slug);
+      const res = await fetch("/api/produk"); 
+      const products = await res.json();
+      const found = products.find((item: Product) => item.slug === slug);
       setProduk(found || null);
     };
     fetchData();
   }, [slug]);
+  
 
   if (!produk) return <div className="text-white">Loading...</div>;
 
