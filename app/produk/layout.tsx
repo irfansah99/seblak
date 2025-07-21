@@ -1,4 +1,4 @@
-import Sidebar from "./sidebar"
+
 
 export default function ProdukLayout({
   children,
@@ -9,7 +9,7 @@ export default function ProdukLayout({
 }) {
   return (
     <div className="flex min-h-screen bg-black text-white">
-      <Sidebar />
+
       <main className="flex-1 p-4 relative">
         {children}
         {modal}
