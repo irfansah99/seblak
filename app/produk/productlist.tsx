@@ -1,21 +1,27 @@
 'use client';
 
+import { useSearchParams } from "next/navigation";
 import { BackgroundGradient } from "../components/background-gradient";
 import Link from "next/link";
 import { Product } from "./type";
 
 export default function ProductList({ items }: { items: Product[] }) {
-
+  const searchParams = useSearchParams();
+  const kategori = searchParams.get("kategori");
+  
+  const filtered = kategori
+    ? items.filter((item) => item.kategori === kategori)
+    : items;
 
 
   return (
     <div className="px-4 py-8 text-white">
       <h2 className="text-2xl font-bold mb-6 capitalize">
-        { "Semua Produk"}
+        {kategori ? kategori : "Semua Produk"}
       </h2>
 
       <div className="grid gap-x-6 gap-y-10 grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 xl:gap-x-8">
-        {items.map((product) => (
+        {filtered.map((product) => (
           <BackgroundGradient
             key={product.id}
             className="p-4 rounded-3xl bg-zinc-800"
@@ -30,7 +36,7 @@ export default function ProductList({ items }: { items: Product[] }) {
             <Link
               href={{
                 pathname: `/produk/${product.slug}`,
-                //query: kategori ? { kategori } : undefined,
+                query: kategori ? { kategori } : undefined,
               }}
               scroll={false} 
             >
