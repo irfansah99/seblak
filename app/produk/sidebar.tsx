@@ -3,7 +3,6 @@ import { useState } from "react"; //
 import { BackgroundGradient } from "../components/background-gradient";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { FaUtensils, FaIceCream, FaWineGlass } from "react-icons/fa";
-import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 const categories = [
@@ -15,8 +14,7 @@ const categories = [
 
 export default function Sidebar() {
 const [open, setOpen] = useState(true);
-const searchParams = useSearchParams();
-const kategori = searchParams.get("kategori");
+
 
   return (
     <>
@@ -42,7 +40,7 @@ const kategori = searchParams.get("kategori");
             <div className="bg-white/10 backdrop-blur-md text-white p-4 rounded-3xl h-full">
             <ul className="rounded mt-16 space-y-3 flex flex-col justify-center items-center gap-2">
               {categories.map((cat) => {
-                const isActive = kategori === cat.value;
+
 
                 return (
                   <Link
@@ -52,11 +50,7 @@ const kategori = searchParams.get("kategori");
                       query: cat.value ? { kategori: cat.value } : {},
                     }}
                     scroll={false}
-                    className={`flex items-center gap-2 flex-col bg-black ring-2 py-3 lg:w-3/4 w-1/2 rounded transition duration-300
-                      ${isActive
-                        ? "ring-cyan-200 shadow-lg shadow-cyan-400/80 scale-105"
-                        : "ring-cyan-500 hover:ring-cyan-300 hover:shadow-lg hover:shadow-cyan-400/50 hover:scale-105"
-                      }`}
+                    className={`flex items-center gap-2 flex-col bg-black ring-2 py-3 lg:w-3/4 w-1/2 rounded transition duration-300 ring-cyan-200 shadow-lg shadow-cyan-400/80 scale-105`}
                   >
                     {cat.icon}
                     <span>{cat.label}</span>
