@@ -3,7 +3,6 @@ import { useState } from "react"; //
 import { BackgroundGradient } from "../components/background-gradient";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { FaUtensils, FaIceCream, FaWineGlass } from "react-icons/fa";
-import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 const categories = [
