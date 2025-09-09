@@ -95,7 +95,7 @@ export async function PATCH(request: Request, context: { params: Promise<{ slug:
   }
   
 
-  function serializeBigInt(obj) {
+  function serializeBigInt(obj : any) {
     return JSON.parse(
       JSON.stringify(obj, (key, value) =>
         typeof value === "bigint" ? value.toString() : value
