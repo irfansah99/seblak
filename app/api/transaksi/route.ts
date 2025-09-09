@@ -6,7 +6,6 @@ export async function POST(request: NextRequest) {
   try {
     const { cart_id } = await request.json();
 
-    // Cek cart
     const existingCart = await prisma.cart.findUnique({
       where: { id: cart_id },
     });
