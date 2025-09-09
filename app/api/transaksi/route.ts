@@ -118,35 +118,4 @@ function serializeBigInt(obj: any) {
       typeof value === "bigint" ? value.toString() : value
     )
   );
-}
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
-  try {
-    const transaksiid = parseInt(params.id);
-
-    const transaksi = await prisma.transaksi.findUnique({
-      where: { id: transaksiid },
-      select: { status: true },
-    });
-
-    if (!transaksi) {
-      return NextResponse.json({ success: false, message: "Transaksi tidak ditemukan" }, { status: 404 });
-    }
-
-    let newStatus: string | null = null;
-    if (transaksi.status === "pending") newStatus = "proses";
-    else if (transaksi.status === "proses") newStatus = "selesai";
-
-    if (!newStatus) {
-      return NextResponse.json({ success: false, message: "Status tidak bisa diperbarui" }, { status: 400 });
-    }
-
-    const updateTransaksi = await prisma.transaksi.update({
-      where: { id: transaksiid },
-      data: { status: newStatus },
-    });
-
-    return NextResponse.json({ success: true, data: serializeBigInt(updateTransaksi) }, { status: 200 });
-  } catch (error) {
-    return NextResponse.json({ success: false, message: String(error) }, { status: 500 });
   }
-}
