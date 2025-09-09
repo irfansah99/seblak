@@ -14,31 +14,32 @@ function serializeBigInt(obj: any) {
 
 export async function GET(req: NextRequest) {
   try {
-    const { searchParams } = new URL(req.url);
-    const mode = searchParams.get("mode");
+    // Ambil ID dari path manual
+    const id = req.nextUrl.pathname.split("/").pop();
 
-    let data;
-    if (mode === "first") {
-      data = serializeBigInt(await getFirstCart());
-    } else {
-      data = serializeBigInt(await getAllCarts());
+    if (!id) {
+      return NextResponse.json(
+        { success: false, message: "ID tidak ditemukan di path" },
+        { status: 400 }
+      );
     }
 
-    return NextResponse.json(
-      {
-        success: true,
-        message: mode === "first" ? "Keranjang terbaru" : "Semua keranjang",
-        data,
-      },
-      { status: 200 }
-    );
+    const cart = await prisma.cart.findUnique({
+      where: { id: Number(id) },
+      include: { details: true },
+    });
+
+    if (!cart) {
+      return NextResponse.json(
+        { success: false, message: "Keranjang tidak ditemukan" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({ success: true, data: cart });
   } catch (error: any) {
-    console.error("Error fetching carts:", error);
     return NextResponse.json(
-      {
-        success: false,
-        message: error.message || "Gagal mengambil data keranjang",
-      },
+      { success: false, message: error.message },
       { status: 500 }
     );
   }
