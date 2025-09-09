@@ -12,8 +12,8 @@ export default function CartList({ items }: { items: any }) {
   const [loadingId, setLoadingId] = useImmer<number | null>(null);
   const [isPending, startTransition] = useTransition();
 
-  const totalBarang = cartDetails.reduce((acc, item) => acc + item.jumlah, 0);
-  const totalHarga = cartDetails.reduce((acc, item) => {
+  const totalBarang = cartDetails.reduce((acc : number, item : any) => acc + item.jumlah, 0);
+  const totalHarga = cartDetails.reduce((acc : number, item : any) => {
     let harga = Number(item.product.price || 0);
     if (item.ukuran === "large") {
       harga += harga * 0.25;
@@ -48,8 +48,8 @@ export default function CartList({ items }: { items: any }) {
     startTransition(async () => {
       const res = await deleteCartDetail(id);
       if (res.success) {
-        updateCartDetails((draft) => {
-          const idx = draft.findIndex((item) => item.id === id);
+        updateCartDetails((draft : any) => {
+          const idx = draft.findIndex((item : any) => item.id === id);
           if (idx !== -1) draft.splice(idx, 1);
         });
       } else {
@@ -79,8 +79,8 @@ export default function CartList({ items }: { items: any }) {
   };
 
   const handleChangeJumlah = (id: number, nilai: number) => {
-    updateCartDetails((draft) => {
-      const item = draft.find((i) => i.id === id);
+    updateCartDetails((draft : any) => {
+      const item = draft.find((i : any) => i.id === id);
       if (item) {
         const jumlahBaru = Math.max(1, item.jumlah + nilai);
 
