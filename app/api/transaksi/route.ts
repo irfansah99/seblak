@@ -48,61 +48,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function getTransaksi(user_id?: string) {
-  try {
-    const cart = await prisma.cart.findMany({
-      where: { 
-        user_id,
-        status: "selesai"
-      },
-      orderBy: { created_at: "desc" },
-      include: {
-        user: true,
-        details: {
-          orderBy: { id: "asc" },
-          include: {
-            product: true,
-          },
-        },
-        transaksi: true, 
-      },
-    });
 
-
-    const konversi = cart.map((p) => ({
-      ...p,
-      id: Number(p.id),
-      total_harga: Number(p.total_harga),
-
-      details: p.details.map((d) => ({
-        ...d,
-        id: Number(d.id),
-        subtotal: Number(d.subtotal),
-      })),
-
-      transaksi: p.transaksi
-        ? {
-            ...p.transaksi,
-            id: Number(p.transaksi.id),
-            total_bayar: Number(p.transaksi.total_bayar),
-          }
-        : null,
-    }));
-
-    return {
-      success: true,
-      message: "List data Transaksi",
-      data: konversi,
-    };
-  } catch (error: any) {
-    console.error("Error fetching transaksi:", error);
-    return {
-      success: false,
-      message: error.message || "Gagal mengambil data transaksi",
-      data: [],
-    };
-  }
-}
 export async function GET() {
   try {
     const cart = await prisma.cart.findMany({

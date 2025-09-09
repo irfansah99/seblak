@@ -2,7 +2,8 @@ import { Suspense } from "react";
 import Transaksilist from "./Transaksilist";
 
 import { auth } from "@/auth";
-import { getTransaksi } from "@/app/api/transaksi/route";
+import { getTransaksi } from "@/lib/action";
+
 
 export default async function Transaksi() {
 const sesi = await auth()
