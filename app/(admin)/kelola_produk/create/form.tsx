@@ -8,7 +8,8 @@ import { useFormStatus } from "react-dom";
 export default function FormProduk() {
   const [state, formAction] = useActionState(produkCredentials, null);
   const { pending } = useFormStatus();
-  const [Gambar, setGambar] = useState()
+  const [Gambar, setGambar] = useState<string | undefined>(undefined);
+
   return (
     <form action={formAction} className="space-y-6" >
       {state?.message && (
