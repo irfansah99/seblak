@@ -3,45 +3,7 @@ import { Decimal } from "@prisma/client/runtime/library";
 import { NextRequest, NextResponse } from "next/server";
 
 
-export async function GET(
-  request: Request,
-  context: { params: { id: string } }
-) {
-  const { id } = context.params;
 
-  try {
-    const cart = await prisma.cart_detail.findUnique({
-      where: { id: BigInt(id) },
-    });
-
-    if (!cart) {
-      return NextResponse.json(
-        { success: false, message: "Produk tidak ditemukan", data: null },
-        { status: 404 }
-      );
-    }
-
-
-    const konversi = bigIntToNumber(cart);
-
-    return NextResponse.json(
-      { success: true, message: "Detail data produk", data: konversi },
-      { status: 200 }
-    );
-  } catch (error) {
-    console.error("Error fetching product:", error);
-    return NextResponse.json(
-      {
-        success: false,
-        message:
-          error instanceof Error
-            ? error.message
-            : "Gagal mengambil data produk",
-      },
-      { status: 500 }
-    );
-  }
-}
 export async function PATCH(
   request: Request,
   context: { params: Promise<{ id: string }> }
