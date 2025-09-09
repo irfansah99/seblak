@@ -1,8 +1,12 @@
 import type { NextConfig } from "next";
 import withFlowbiteReact from "flowbite-react/plugin/nextjs";
 
-const nextConfig: NextConfig = {
-  /* config options here */
+const nextConfig = {
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '10mb', 
+    },
+  },
 };
 
 export default withFlowbiteReact(nextConfig);

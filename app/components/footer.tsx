@@ -1,3 +1,5 @@
+'use client'
+import { usePathname } from "next/navigation";
 import {
     IoLogoFacebook,
     IoLogoTwitter,
@@ -7,6 +9,10 @@ import {
   } from "react-icons/io";
   
   export default function Footer() {
+    const pathname = usePathname();
+    const halaman = ["/login","/register"]
+    if (halaman.includes(pathname)) return null;
+
     return (
       <footer className="bg-slate-900 text-white py-6 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -15,7 +21,7 @@ import {
           <p className="text-sm mb-4">
             &copy; {new Date().getFullYear()} Seblak99. All rights reserved. Designed by{" "}
             <a
-              href="https://github.com/irfan99"
+              href="https://github.com/irfansah99"
               className="underline hover:text-blue-400 transition"
               target="_blank"
               rel="noopener noreferrer"
