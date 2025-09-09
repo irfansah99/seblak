@@ -79,7 +79,10 @@ export async function POST(request: NextRequest) {
     const { product_id, jumlah, ukuran, level } = await request.json();
     const sesi = await auth();
     const user_id = sesi?.user?.id;
-
+    
+    if (!user_id) {
+      throw new Error("User tidak ditemukan");
+    }
     const product = await prisma.product.findUnique({
       where: { id: product_id },
     });
@@ -119,7 +122,7 @@ export async function POST(request: NextRequest) {
               update: {
                 where: { id: existingDetail.id },
                 data: {
-                  jumlah: new Decimal(existingDetail.jumlah).add(jumlah),
+                  jumlah: existingDetail.jumlah + jumlah,
                   subtotal: new Decimal(existingDetail.subtotal).add(subtotal),
                 },
               },
