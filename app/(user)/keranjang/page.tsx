@@ -1,12 +1,22 @@
 import React, { Suspense } from "react";
 import CartList from "./CartList";
-import { auth } from "@/auth";
-import { getFirstCart } from "@/app/api/keranjang/route";
+
+async function getFirstCart() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/keranjang`, {
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Gagal mengambil data keranjang");
+  }
+
+  const data = await res.json();
+  return data.data;
+}
 
 
-export default async function ProdukPage() {
-  const sesi = await auth();
-  const carts = await getFirstCart(sesi?.user?.id);
+export default async function KeranjangPage() {
+  const carts = await getFirstCart();
 
 
   return (
