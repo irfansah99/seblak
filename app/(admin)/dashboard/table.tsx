@@ -14,7 +14,8 @@ export default function TableTransaksi() {
   const { data, error } = useSWR("/api/transaksi", fetcher);
 
   const transaksiValid = data?.data?.filter((items: any) => items.transaksi) ?? []
-
+  if(error){
+    return "Error";  }
   if (transaksiValid.length === 0) {
     return (
       <Table>

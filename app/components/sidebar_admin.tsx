@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Fascinate_Inline } from "next/font/google";
 import { usePathname } from "next/navigation";
 import type { Session } from "next-auth";

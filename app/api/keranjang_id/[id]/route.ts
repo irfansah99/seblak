@@ -87,7 +87,6 @@ await prisma.cart_detail.update({
   },
 });
 
-// 2. Update cart
 const updatedCart = await prisma.cart.update({
   where: { id: cart.id },
   data: {
