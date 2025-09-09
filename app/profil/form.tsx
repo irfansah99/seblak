@@ -1,7 +1,6 @@
 "use client";
 import { profilCredentials } from "@/lib/action";
 import { signOut } from "next-auth/react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useActionState, useEffect, useState } from "react";
 import { useFormStatus } from "react-dom";
