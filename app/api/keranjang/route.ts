@@ -1,73 +1,15 @@
+// app/api/keranjang/route.ts
+import { getAllCarts, getFirstCart } from "@/app/components/lib/cart";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function getAllCarts() {
-  const carts = await prisma.cart.findMany({
-    orderBy: { created_at: "desc" },
-    include: {
-      details: {
-        include: {
-          product: true,
-        },
-      },
-      transaksi: true,
-    },
-  });
-
-  return carts.map((p) => ({
-    ...p,
-    id: Number(p.id),
-    total_harga: Number(p.total_harga),
-    details: p.details.map((d) => ({
-      ...d,
-      id: Number(d.id),
-      product_id: Number(d.product_id),
-      jumlah: Number(d.jumlah),
-      subtotal: Number(d.subtotal),
-      product: {
-        ...d.product,
-        id: Number(d.product.id),
-        price: Number(d.product.price),
-      },
-    })),
-  }));
-}
-
-export async function getFirstCart(userId?:string) {
-  const cart = await prisma.cart.findFirst({
-    where: { user_id: userId },
-    orderBy: { created_at: "desc" },
-    include: {
-      user: true,
-      details: {
-        orderBy: { id: "asc" },
-        include: {
-          product: true,
-        },
-      },
-    },
-  });
-
-  if (!cart) return null;
-
-  return {
-    ...cart,
-    id: Number(cart.id),
-    total_harga: Number(cart.total_harga),
-    details: cart.details.map((d) => ({
-      ...d,
-      id: Number(d.id),
-      product_id: Number(d.product_id),
-      jumlah: d.jumlah,
-      subtotal: Number(d.subtotal),
-      product: {
-        ...d.product,
-        id: Number(d.product.id),
-        price: Number(d.product.price),
-      },
-    })),
-  };
+function serializeBigInt(obj: any) {
+  return JSON.parse(
+    JSON.stringify(obj, (key, value) =>
+      typeof value === "bigint" ? value.toString() : value
+    )
+  );
 }
 
 export async function GET(req: NextRequest) {
@@ -90,7 +32,7 @@ export async function GET(req: NextRequest) {
       },
       { status: 200 }
     );
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error fetching carts:", error);
     return NextResponse.json(
       {
@@ -146,18 +88,10 @@ export async function POST(request: NextRequest) {
       { success: true, data: serializeBigInt(cart) },
       { status: 201 }
     );
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json(
       { success: false, message: error.message },
       { status: 500 }
     );
   }
-}
-
-function serializeBigInt(obj) {
-  return JSON.parse(
-    JSON.stringify(obj, (key, value) =>
-      typeof value === "bigint" ? value.toString() : value
-    )
-  );
 }
