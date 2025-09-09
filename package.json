@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "flowbite-react patch"
+    "postinstall": "prisma generate && flowbite-react patch"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.10.0",
