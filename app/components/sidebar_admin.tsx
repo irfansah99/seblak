@@ -29,7 +29,7 @@ export default function Sidebar_admin({
     <div className="flex h-screen">
       <div
         className={`fixed top-0 left-0 h-full bg-white p-4 shadow transition-all duration-300 ${
-          Open ? "w-[15%]" : "w-[5%]"
+          Open ? "lg:w-[15%] w-[25%]" : "lg:w-[5%] w-[15%]"
         }`}
       >
         <div className="flex items-center">
@@ -43,11 +43,11 @@ export default function Sidebar_admin({
             Seblak99
           </h1>
           <button
-            className="text-white px-3 py-1 rounded bg-gray-900 hover:bg-gray-700 absolute top-4 right-4"
+            className="text-white lg:px-3  px-2 py-1 rounded bg-gray-900 hover:bg-gray-700 absolute top-4 right-4"
             onClick={() => setOpen(!Open)}
           >
             {Open ? (
-              <XMarkIcon className="w-6 h-7" />
+              <XMarkIcon className="lg:w-6 lg:h-7 w-3 h-4" />
             ) : (
               <Bars3Icon className="w-6 h-7" />
             )}
@@ -73,7 +73,7 @@ export default function Sidebar_admin({
 
       <div
         className={`flex-1 transition-all duration-300 ${
-          Open ? "ml-[15%]" : "ml-[5%]"
+          Open ? "lg:ml-[15%] ml-[25%]" : "lg:ml-[5%] ml-[15%]"
         }`}
       >
         <nav className="sticky top-0 px-4 py-2 bg-gray-900 text-white flex justify-between items-center z-50">
