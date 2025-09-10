@@ -1,12 +1,13 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { prisma } from "./prisma";
+
 import { produkSchema, profilSchema, registerSchema, signSchema } from "./zood";
 import { hashSync } from "bcrypt-ts";
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
 import { supabase } from "./supabaseClient";
+import { prisma } from "@/lib/prisma";
 
 export const signupCredentials = async (
   prefState: unknown,
