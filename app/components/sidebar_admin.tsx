@@ -28,36 +28,36 @@ export default function Sidebar_admin({
   return (
     <div className="flex h-screen">
       <div
-        className={`fixed top-0 left-0 h-full bg-white p-4 shadow transition-all duration-300 ${
-          Open ? "lg:w-[15%] w-[25%]" : "lg:w-[5%] w-[15%]"
+        className={`fixed top-0 left-0 h-full bg-white lg:p-4 p-2 shadow transition-all duration-300 ${
+          Open ? "lg:w-[15%] w-[30%]" : "lg:w-[5%] w-[15%]"
         }`}
       >
-        <div className="flex items-center">
+        <div className={`flex items-center  mt-2 ${Open? 'justify-between' : 'justify-center' } gap-1`}>
           <h1
             className={`${
               fascinate_Inline.className
-            } font-bold transition-all duration-300 text-cyan-300 lg:text-3xl text-sm ${
+            } font-bold transition-all duration-300 text-cyan-300 lg:text-3xl text-lg ${
               Open ? "" : "hidden"
             }`}
           >
             Seblak99
           </h1>
           <button
-            className="text-white lg:px-3  px-2 py-1 rounded bg-gray-900 hover:bg-gray-700 absolute top-4 right-4"
+            className="text-white lg:px-3  px-2 py-1 rounded bg-gray-900 hover:bg-gray-700"
             onClick={() => setOpen(!Open)}
           >
             {Open ? (
-              <XMarkIcon className="lg:w-6 lg:h-7 w-3 h-4" />
+              <XMarkIcon className="w-6 h-7 " />
             ) : (
               <Bars3Icon className="w-6 h-7" />
             )}
           </button>
         </div>
 
-        <ul className={`space-y-2  ${Open ? "mt-6" : "mt-15"  }`}>
+        <ul className="space-y-2   mt-6 text-sm">
           <Link href={'/dashboard'} className={`p-2 hover:bg-gray-200 rounded flex items-center gap-2 cursor-pointer ${Open ? '' : "justify-center"}   ${pathname === '/dashboard'? 'bg-slate-500 text-white hover:bg-slate-700' : ''}`}>
             <HomeIcon className="w-7 h-7" />
-            <span className={`${Open ? "" : "hidden"}`}>Dashboard</span>
+            <span className={`${Open ? "" : "hidden"} `}>Dashboard</span>
           </Link>
 
           <Link href={'/kelola_produk'} className={`p-2 hover:bg-gray-200 rounded flex items-center gap-2 cursor-pointer ${Open ? '' : "justify-center"}   ${pathname === '/kelola_produk'? 'bg-slate-500 text-white  hover:bg-slate-700' : ''}`}>
@@ -73,11 +73,11 @@ export default function Sidebar_admin({
 
       <div
         className={`flex-1 transition-all duration-300 ${
-          Open ? "lg:ml-[15%] ml-[25%]" : "lg:ml-[5%] ml-[15%]"
+          Open ? "lg:ml-[15%] ml-[30%]" : "lg:ml-[5%] ml-[15%]"
         }`}
       >
         <nav className="sticky top-0 px-4 py-2 bg-gray-900 text-white flex justify-between items-center z-50">
-          <h1 className="text-2xl">Halaman {header}</h1>
+          <h1 className="lg:text-2xl text-lg">Halaman {header}</h1>
           <div className="relative group">
             <img
               src={sesi.user?.image || "/default-avatar.png"}

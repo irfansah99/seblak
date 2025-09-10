@@ -1,28 +1,29 @@
 'use client';
 
 import { useParams, useRouter, useSearchParams } from "next/navigation";
-
 import { Product } from "./type";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BackgroundGradient } from "@/app/components/background-gradient";
+import useSWR from "swr";
 
-export default function ProductList({ items }: { items: Product[] }) {
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+export default function ProductList() {
   const searchParams = useSearchParams();
   const kategori = searchParams.get("kategori");
   const { slug } = useParams();
   const router = useRouter();
   
   const [loadingTambah, setLoadingTambah] = useState(false);
+  const { data, error } = useSWR("/api/produk", fetcher);
+
+  if (error) return <p>Error fetching products</p>;
+  if (!data) return <p>Loading...</p>;
+  if (data.data.length === 0) return <p>Tidak ada produk</p>;
 
   const filtered = kategori
-    ? items.filter((item) => item.kategori === kategori)
-    : items;
-
-  useEffect(() => {
-    if (!slug) {
-      setLoadingTambah(false);
-    }
-  }, [slug]);
+    ? data.data.filter((item: Product) => item.kategori === kategori)
+    : data.data;
 
   return (
     <div className="px-4 py-8 text-white">
@@ -31,7 +32,7 @@ export default function ProductList({ items }: { items: Product[] }) {
       </h2>
 
       <div className="grid gap-x-6 gap-y-10 sm:grid-cols-3 grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 xl:gap-x-8">
-        {filtered.map((product) => (
+        {filtered.map((product: Product) => (
           <BackgroundGradient
             key={product.id}
             className="sm:p-4 p-2 rounded-3xl bg-zinc-800 w-full h-full"
@@ -44,16 +45,17 @@ export default function ProductList({ items }: { items: Product[] }) {
             />
             <h3 className="mt-4 text-[12px] text-white">{product.name}</h3>
             <p className="mt-1 text-lg font-medium text-white">
-              $ {product.price ? Number(product.price) : 0}
+              $ {Number(product.price)}
             </p>
             <button
               disabled={loadingTambah}
-              onClick={() => {
-                setLoadingTambah(true); 
-                router.push(
+              onClick={async () => {
+                setLoadingTambah(true);
+                await router.push(
                   `/produk/${product.slug}${kategori ? `?kategori=${kategori}` : ''}`,
                   { scroll: false }
                 );
+                setLoadingTambah(false);
               }}
               className="py-1 w-full mb-2 rounded text-center bg-blue-500 hover:bg-blue-800"
             >
